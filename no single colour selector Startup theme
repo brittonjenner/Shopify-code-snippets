@@ -1,0 +1,42 @@
+{% for option in product.options %}
+
+{% assign downcaseOption = option | downcase %}
+ 
+	{% if downcaseOption == "colour" and forloop.index == 1 %}
+		{% assign optionNum = 1 %}
+	{% elsif downcaseOption == "colour" and forloop.index == 2 %}
+		{% assign optionNum = 2 %}
+	{% elsif downcaseOption == "colour" and forloop.index == 3 %}
+		{% assign optionNum = 3 %}
+	{% endif %}
+{% endfor %}
+
+{% assign optionValue = optionNum | prepend:'option' %}
+
+{% for variant in product.variants %}
+	{% assign testString = testString | append: variant[optionValue] | append: ' ' %}
+{% endfor %}
+
+{% assign testArraySize = testString | split: ' ' | uniq | size %}
+
+{% if testArraySize == 1 %}
+	{% if optionNum == 1 %}
+	<script>
+      $(window).load(function() {
+    	$('.selector-wrapper:first-of-type').hide();
+  	  });
+    </script>
+	{% elsif optionNum == 2 %}
+    <script>
+      $(window).load(function() {
+    	$('.selector-wrapper:nth-of-type(2)').hide();
+  	  });
+    </script>
+	{% elsif optionNum == 3 %}
+	<script>
+      $(window).load(function() {
+    	$('.selector-wrapper:last-of-type').hide();
+  	  });
+    </script>
+	{% endif %}
+{% endif %}
