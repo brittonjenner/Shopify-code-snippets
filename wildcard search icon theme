@@ -1,0 +1,19 @@
+<script type="text/javascript">
+    function wildcard(str) {
+     str = str.split(' ');                // will split the string delimited by space into an array of words
+
+     for(var i = 0; i < str.length; i++){               // str.length holds the number of occurrences of the array...
+          str[i] = str[i] + "*";                        // adds * for wildcard to each array element
+     }
+     return str.join(' ');                              //  converts the array of words back to a sentence.
+}
+
+        $('#search form').submit(function () {
+          
+            var $searchfield = $('#search #q'),
+                searchVal = $searchfield.val();
+          
+            $searchfield.val(wildcard(searchVal));
+
+        });
+</script>
