@@ -1,3 +1,4 @@
+{% if template contains 'product' %}
 {% for option in product.options %}
 
 {% assign downcaseOption = option | downcase %}
@@ -22,21 +23,22 @@
 {% if testArraySize == 1 %}
 	{% if optionNum == 1 %}
 	<script>
-      $(window).load(function() {
+      $(document).ready(function() {
     	$('.selector-wrapper:first-of-type').hide();
   	  });
     </script>
 	{% elsif optionNum == 2 %}
     <script>
-      $(window).load(function() {
+      $(document).ready(function() {
     	$('.selector-wrapper:nth-of-type(2)').hide();
   	  });
     </script>
 	{% elsif optionNum == 3 %}
 	<script>
-      $(window).load(function() {
+      $(document).ready(function() {
     	$('.selector-wrapper:last-of-type').hide();
   	  });
     </script>
 	{% endif %}
+{% endif %}
 {% endif %}
