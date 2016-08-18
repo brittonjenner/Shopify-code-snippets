@@ -1,0 +1,35 @@
+<script type="text/javascript">
+    function wildcard(str) {
+     str = str.split(' ');                // will split the string delimited by space into an array of words
+
+     for(var i = 0; i < str.length; i++){               // str.length holds the number of occurrences of the array...
+          var limit = str.length - 1; 
+          if (i < limit) {
+          str[i] = str[i] + "* OR";                   // adds * for wildcard to each array element
+          } else if ( i == limit) {
+          str[i] = str[i] + "*";
+          };                       
+     }
+     return str.join(' ');                              //  converts the array of words back to a sentence.
+}
+
+        $('.header-search-form').submit(function () {
+          
+            var $searchfield = $('.header-search-input'),
+                searchVal = $searchfield.val();
+          
+            $searchfield.val(wildcard(searchVal));
+
+        });
+
+    {% if template contains 'search' %}
+        $('.search-form').submit(function () {
+          
+            var $searchfield = $('.search-input input'),
+                searchVal = $searchfield.val();
+          
+            $searchfield.val(wildcard(searchVal));
+
+        });
+    {% endif %}
+</script>
