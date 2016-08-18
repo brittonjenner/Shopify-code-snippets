@@ -3,7 +3,12 @@
      str = str.split(' ');                // will split the string delimited by space into an array of words
 
      for(var i = 0; i < str.length; i++){               // str.length holds the number of occurrences of the array...
-          str[i] = str[i] + "*";                        // adds * for wildcard to each array element
+          var limit = str.length - 1; 
+          if (i < limit) {
+          str[i] = str[i] + "* OR";                   // adds * for wildcard to each array element
+          } else if ( i == limit) {
+          str[i] = str[i] + "*";
+          };                       
      }
      return str.join(' ');                              //  converts the array of words back to a sentence.
 }
@@ -16,4 +21,16 @@
             $searchfield.val(wildcard(searchVal));
 
         });
+
+{% if template contains 'search' %}
+ $('#search-bar form').submit(function () {
+          
+            var $searchfield = $('#search-bar #q'),
+                searchVal = $searchfield.val();
+          
+            $searchfield.val(wildcard(searchVal));
+
+        });
+{% endif %}
+
 </script>
